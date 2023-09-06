@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1900" />
+    <title>Liv2D Demo</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+    </style>
+    <!-- Pollyfill script -->
+    <script src="https://unpkg.com/core-js-bundle@3.6.1/minified.js"></script>
+    <!-- Live2DCubismCore script -->
+    <script src="../Core/live2dcubismcore.js"></script>
+    <!-- Build script -->
+    <script src="./dist/bundle.js"></script>
+  </head>
+  <body>
+    <button style="position: absolute; top: 0; left: 0" id="warikomi">
+      モーション切り替え
+    </button>
+    <script>
+      const motionList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      let counter = 0;
+      const button = document.getElementById("warikomi");
+      button.onclick = function () {
+        button.disabled = true;
+        if(counter >= motionList.length) counter = 0;
+        window.LAppModel.startMotion("Idle", counter, 1, () => {
+          console.log("モーション終了");
+          button.disabled = false;
+        });
+        console.log(motionList[counter]);
+        counter++;
+      };
+    </script>
+  </body>
+</html>
